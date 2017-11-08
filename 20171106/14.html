@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <script type="text/javascript">
+      let arr = [4,5,6,7];
+
+      let res = arr.reduce((dangqian,item,index)=>{
+          if(index<arr.length-1){
+              return dangqian+item;
+          }else{
+              return (dangqian+item)/arr.length;
+          }
+
+      });
+
+      alert(res);
+  </script>
+  <body>
+
+  </body>
+</html>

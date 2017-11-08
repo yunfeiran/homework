@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      //ECMAScript 6  类
+
+      //定义一个类 class。类里面的方法没有function
+      class User{
+        constructor(name,pass){
+          this.name=name;
+          this.pass=pass;
+        }
+
+        login(){
+          alert('登陆成功');
+        }
+      }
+
+
+      class Vipuser extends User {
+        constructor(name,pass,level) {
+          super(name,pass);
+          this.level=level;
+        }
+
+        download(){
+          alert('下载成功');
+        }
+      }
+
+      // let u = new User('liyu','123');
+      // u.login();
+      let v = new Vipuser('haorna','321',8);
+      // alert(v.name);
+      // alert(v.pass);
+      // v.login();
+      // v.download();
+      alert(v instanceof Vipuser);
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

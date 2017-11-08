@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <script type="text/javascript">
+      var arr = [4,5,5];
+      //注意let作用域  Uncaught ReferenceError: Invalid left-hand side in assignment
+      function functionName(a,b,c) {
+          alert(a+b+c);
+      }
+      functionName(...arr);  //展开数据  =  4，5，5
+  </script>
+  <body>
+
+  </body>
+</html>
