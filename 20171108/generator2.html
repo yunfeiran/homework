@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <script type="text/javascript">
+    function *show(a,b) {
+      alert(a);
+      alert(b);
+      let c = yield;
+
+      alert(2)
+      console.log(c);
+    }
+
+    let obj = show(3,4);
+
+    obj.next();
+    obj.next(333);
+  </script>
+  <body>
+
+  </body>
+</html>
