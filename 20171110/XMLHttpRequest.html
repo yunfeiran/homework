@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      window.onload = function () {
+        let btn_id = document.getElementById('btn');
+        btn_id.onclick = function test() {
+          //alert(55);
+
+          //1.创建对象
+          let xhr = new XMLHttpRequest();
+          //alert(xhr.readyState);
+          //2.链接
+          xhr.open('GET','data/1.txt',true);
+          //alert(xhr.readyState);
+          //3.发送
+          xhr.send();
+          //alert(xhr.readyState);
+          //4.接收
+          xhr.onreadystatechange = function(){
+            //alert(xhr.readyState);
+            if(xhr.readyState == 4){
+              // alert('成功');
+              // alert(xhr.status);
+              if((xhr.status >=200 && xhr.status < 300) || xhr.status == 304){
+                alert('成功');
+              }else{
+                alert('失败');
+              }
+            }
+          }
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <input type="button" value="按钮" id="btn">
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name":"yunfeiran",
+  "age":26,
+  "score":
+  [{"math":78,"English":100}]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <script type="text/javascript">
+    window.onload = function(){
+      let btn= document.getElementsByClassName('btn');
+      let btn_id = btn[0];
+      btn_id.onclick = function(){
+        //1.创建对象
+        let xhr = new XMLHttpRequest();
+        //2.链接
+        xhr.open('GET','data/1.txt',true);
+        //3.发送
+        xhr.send();
+        //4.接收
+        xhr.onreadystatechange = function () {
+          if(xhr.readyState == 4){
+            if((xhr.status >=200 && xhr.status < 300) || xhr.status == 304){
+              alert('成功');
+              let arr = eval('('+xhr.responseText+')');
+              alert(arr);
+            }else{
+              alert('失败');
+            }
+        }
+      }
+    }
+  }
+  </script>
+  <body>
+    <input type="button" name="按钮" value="按钮" class="btn">
+  </body>
+</html>
