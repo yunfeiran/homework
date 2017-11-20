@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <script src="http://localhost:5555/socket.io/socket.io.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    let sock = io.connect('ws://localhost:5555/');
+    //sock.emit('aaa',3,4);
+    sock.on('aaa',function (a) {
+      console.log('后端传过来的'+a);
+    });
+  </script>
+
+  <body>
+
+  </body>
+</html>
