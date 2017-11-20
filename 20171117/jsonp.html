@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      function show(json) {
+        let ul1 = document.getElementById('ul1');
+        //alert(json.s);
+        ul1.innerHTML = '';
+        json.s.forEach(function (str) {
+          //创建li节点
+          let oLi = document.createElement('li');
+          oLi.innerHTML = str;
+          ul1.appendChild(oLi);
+        });
+      }
+    </script>
+    <!-- <script src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as&cb=show" charset="utf-8"></script> -->
+  </head>
+  <script type="text/javascript">
+    window.onload = function () {
+      let text1 = document.getElementById('text1');
+
+      text1.oninput = function () {
+        let oScript = document.createElement('script');
+        oScript.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${text1.value}&cb=show`;
+        document.head.appendChild(oScript);
+      }
+    }
+  </script>
+  <body>
+    <input type="text" name="shuru" id="text1">
+    <ul id="ul1">
+
+    </ul>
+  </body>
+</html>

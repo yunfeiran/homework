@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      window.onload=function () {
+        var btn = document.getElementById('btn1');
+        btn.onclick=function () {
+          var fd = new FormData();
+          fd.set('a',12);
+        //  fd.set('a',13);
+          var xhr = new XMLHttpRequest();
+          xhr.open('post','http://localhost:7777/',true);
+          xhr.send(fd);
+          xhr.onreadystatechange=function () {
+            if(xhr.readyState == 4){
+              if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                alert(xhr.status);
+              }
+            }
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" name="btn" value="ajax点击测试" id="btn1">
+  </body>
+</html>
