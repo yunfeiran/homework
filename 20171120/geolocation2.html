@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      window.onload=function () {
+        var btn1 = document.getElementById('btn1');
+        btn1.onclick=function () {
+          if (window.navigator.geolocation) {
+              //alert('浏览器支持');
+              //里面有三个参数，一个是成功，一个是失败，一个是参数
+              navigator.geolocation.getCurrentPosition(function (res){
+               alert('成功');
+               alert(res.coords.latitude);
+               //latitude  纬度  alitude  海拔高度   heeding 朝向  speed  速度
+              //console.log(res);
+              },function (err) {
+                alert('失败');
+              },{});
+          }else {
+            alert('浏览器不支持定位');
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" name="btn1" value="获取地址" id="btn1">
+  </body>
+</html>
