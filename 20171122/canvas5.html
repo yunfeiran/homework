@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: black;
+        text-align: center;
+      }
+      #canvas{
+        background: white;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oCanvas = document.getElementById('canvas');
+        let gd = oCanvas.getContext('2d');
+        gd.beginPath();
+
+        //画一个扇形
+        /*
+          1.先画一条斜线
+          2.再根据度数画一条弧
+          3.封闭
+
+          已知  圆心点坐标200，100  r=100
+
+          根据已知，求出在圆弧上的坐标
+        */
+        gd.moveTo(200,100);
+      //  gd.lineTo(200,200);
+        //根据r求出在弧上的点的坐标x,y
+        let x = 200 + Math.sin(30*Math.PI/180)*100;
+        let y = 100 - Math.cos(30*Math.PI/180)*100;
+        gd.lineTo(x,y);
+
+        //6个参数：圆心点的坐标xy,半径r，起始的弧度，是否逆时针（x,y,r,起始弧度，最终弧度，是否逆时针）
+        gd.arc(200,100,100,(30-90)*Math.PI/180,(90-90)*Math.PI/180,false);
+
+        gd.closePath();
+
+        gd.fillStyle = '#ccc';
+        //gd.stroke();
+        gd.fill();
+
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: black;
+        text-align: center;
+      }
+      #canvas{
+        background: white;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oCanvas = document.getElementById('canvas');
+        let gd = oCanvas.getContext('2d');
+        gd.beginPath();
+        gd.moveTo(100,100);
+        gd.lineTo(300,100);
+        gd.stroke();
+
+        gd.beginPath();
+        gd.moveTo(300,100);
+        gd.lineTo(300,200);
+        gd.stroke();
+
+        gd.beginPath();
+        gd.moveTo(300,200);
+        gd.lineTo(100,200);
+        gd.stroke();
+
+        gd.beginPath();
+        gd.moveTo(100,200);
+        gd.lineTo(100,100);
+      //  gd.closePath();
+        gd.strokeStyle = 'red';
+      //  gd.lineWidth = 10;
+
+        gd.stroke();
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: black;
+        text-align: center;
+      }
+      #canvas{
+        background: white;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oCanvas = document.getElementById('canvas');
+        let gd = oCanvas.getContext('2d');
+
+        let cx = 200,cy = 100,r = 100;
+
+        function d2c(d) {
+          return d*Math.PI/180;
+        }
+
+
+        function pie(startAng,endAng,color) {
+          gd.beginPath();
+          gd.moveTo(cx,cy);
+        //  gd.lineTo(200,200);
+          //根据r求出在弧上的点的坐标x,y
+          let x = 200 + Math.sin(d2c(startAng))*r;
+          let y = 100 - Math.cos(d2c(startAng))*r;
+          gd.lineTo(x,y);
+
+          //6个参数：圆心点的坐标xy,半径r，起始的弧度，是否逆时针（x,y,r,起始弧度，最终弧度，是否逆时针）
+          gd.arc(cx,cy,r,d2c(startAng-90),d2c(endAng-90),false);
+
+          gd.closePath();
+
+          gd.fillStyle = color;
+          //gd.stroke();
+          gd.fill();
+        }
+
+        //pie(60,180,'red');
+        //1.准备数据
+        let data = [200,400,300,100];
+        let colors = ['#ccc','#c43','#888','#666'];
+        //2.求出总和
+        let sum = data.reduce((temp,item,index)=>temp+item);
+        //3.根据占比算出所占占度数
+        let dushu = data.map(item => {
+          //alert(item);
+          return 360*item/sum;
+        });
+      //  let dushu = data.map(item => 360*item/sum);
+        // alert(sum);
+      //  alert(dushu);
+        let chushi = 0;   //设置初始度数为0度
+        dushu.forEach(function (item,index) {
+          pie(chushi,chushi+item,colors[index]);
+
+          chushi = chushi + item;
+        });
+
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </body>
+</html>

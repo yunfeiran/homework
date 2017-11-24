@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: black;
+        text-align: center;
+      }
+      #canvas{
+        background: white;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oCanvas = document.getElementById('canvas');
+        let gd = oCanvas.getContext('2d');
+        let oColor = document.getElementById('color1');
+        let color = 'black';
+
+        oColor.onchange = function () {
+          color = this.value;
+        }
+
+
+        //写一个画板
+        let lastX,lastY;
+        oCanvas.onmousedown = function (ev) {
+          lastX = ev.offsetX;
+          lastY = ev.offsetY;
+
+          oCanvas.onmousemove = function (ob) {
+              gd.beginPath();
+              gd.moveTo(lastX,lastY);
+              gd.lineTo(ob.offsetX,ob.offsetY);
+
+              lastX = ob.offsetX;
+              lastY = ob.offsetY;
+
+              gd.strokeStyle = color;
+
+              gd.stroke();
+          }
+        }
+
+        oCanvas.onmouseup = function () {
+          oCanvas.onmousemove = null;
+          // oCanvas.onmouseup = null;
+        }
+
+      }
+    </script>
+  </head>
+  <body>
+    <input type="color" name="color" id="color1"><br>
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </body>
+</html>
