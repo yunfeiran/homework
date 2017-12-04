@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <style media="screen">
+      .box{
+        width: 200px;
+        height: 200px;
+
+
+        background: #ccc;
+        line-height: 200px;
+        text-align: center;
+        margin: 100px auto 0;
+        transform: rotate(0deg);
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oBox = document.querySelector('.box');
+
+        oBox.addEventListener('touchstart',function (ev) {
+
+            ev.preventDefault();
+
+          if(ev.targetTouches.length >= 2){
+
+            //求出触摸两点连线长度
+            let aa = Math.pow(ev.targetTouches[0].clientX - ev.targetTouches[1].clientX,2);
+            let bb = Math.pow(ev.targetTouches[0].clientY - ev.targetTouches[1].clientY,2);
+            let c = Math.sqrt(aa + bb);
+            //目标的宽高
+            let ywidth = oBox.offsetWidth,yheight = oBox.offsetHeight;
+
+
+            function fnMove(ev) {
+              if(ev.targetTouches.length >= 2){
+                //两手指移动后连线长度
+                let aa = Math.pow(ev.targetTouches[0].clientX - ev.targetTouches[1].clientX,2);
+                let bb = Math.pow(ev.targetTouches[0].clientY - ev.targetTouches[1].clientY,2);
+                let c2 = Math.sqrt(aa + bb);
+              //  let bizhi = c / c2;
+                //根据比值求出现在的宽高
+                oBox.style.width = c2*ywidth/c+'px';
+                oBox.style.height = oBox.style.lineHeight = c2*yheight/c+'px';
+              }
+              ev.preventDefault();
+            }
+
+
+            function fnEnd() {
+              oBox.removeEventListener('touchmove',fnMove,false);
+              oBox.removeEventListener('touchend',fnEnd,false);
+            }
+
+            oBox.addEventListener('touchmove',fnMove,false);
+            oBox.addEventListener('touchend',fnEnd,false);
+          }
+
+        },false);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      有首歌这
+    </div>
+  </body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <style media="screen">
+      *{margin: 0;padding: 0;list-style: none;}
+      html{
+        font-size: 20px;
+      }
+      body{
+        overflow: hidden;
+      }
+      #binner{
+        width: 25rem;
+        height: 7.8rem;
+        overflow: hidden;
+      }
+      #binner ul{
+        width: 9999rem;
+        transform: translateX(0px);
+      }
+      #binner ul li{
+        width: 25rem;
+        height: 7.8rem;
+        float: left;
+        line-height: 7.8rem;
+        text-align: center;
+      }
+      #content{
+        background: #ccc;
+        transform: translateY(0px);
+        z-index: 2;
+        position: relative;
+        top: -30px;
+      }
+      #upload{
+        position: relative;
+        text-align: center;
+        z-index: 1;
+        line-height: 30px;
+      }
+    </style>
+    <script src="jquery.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      window.onload=function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth*20/500+'px';
+
+        let binner = document.getElementById('binner');
+        let binner_ul = binner.children[0];
+        let content = document.getElementById('content');
+        let upload = document.getElementById('upload');
+
+        let binner_left = 0;   //就是binner的left的值
+        let content_top = 0;
+
+        function loadData(fn){
+          $.ajax({
+            url: 'data.txt?t='+Math.random(),
+            success(str){
+              let arr=str.split('\n');
+
+              $('ol').html('');
+              arr.forEach(s=>{
+                $(`<li>${s}</li>`).appendTo('ol');
+              });
+
+              fn&&fn();
+            },
+            error(){
+              alert('加载失败了');
+            }
+          })
+        }
+
+        loadData();
+
+
+
+
+
+        binner.addEventListener('touchstart',function (ev) {
+          binner_ul.style.transition='';
+          content.style.transition = '';
+          //获取触摸到第一点的坐标
+          let startX = ev.targetTouches[0].clientX;
+          let startY = ev.targetTouches[0].clientY;
+
+          let dir = '';
+
+          let disX = startX - binner_left;
+          let disY = startY - content_top;
+
+          function fnMove(ev) {
+            if (!dir) {
+              if (Math.abs(ev.targetTouches[0].clientX - startX) >= 5) {  //手指在屏幕上移动方向大于等于5  5是自己设定的一个值
+                dir = 'x';
+              }else if(Math.abs(ev.targetTouches[0].clientY - startY) >= 5) {
+                dir = 'y';
+              }
+            }else {
+              if (dir == 'x') {
+                binner_left = ev.targetTouches[0].clientX - disX;
+                binner_ul.style.transform = `translateX(${binner_left}px)`;
+              } else if(dir == 'y'){
+                content_top = ev.targetTouches[0].clientY - disY;
+                if (content_top>0) {
+                  content.style.transform = `translateY(${content_top/3}px)`;
+                  if (content_top>200) {
+                    upload.innerHTML = '松开加载';
+                  }else {
+                    upload.innerHTML = '下拉刷新';
+                  }
+                }else {
+                  content.style.transform = `translateY(${content_top}px)`;
+                }
+              }
+            }
+          }
+
+          function fnEnd() {
+            binner.removeEventListener('touchmove',fnMove,false);
+            binner.removeEventListener('touchend',fnEnd,false);
+
+            if(dir == 'x'){
+              let n = Math.round(-binner_left/binner.offsetWidth);
+              if(n<=0){
+                n=0;
+              }else if(n>=binner_ul.children.length){
+                n = binner_ul.children.length - 1;
+              }
+              binner_left = -n*binner.offsetWidth;
+              binner_ul.style.transition = '0.7s all ease';
+              binner_ul.style.transform = `translateX(${binner_left}px)`;
+            }else if(dir == 'y'){
+              if (content_top > 200) {
+                content_top = 30;
+                upload.innerHTML = '加载中...';
+                //加载信息
+                loadData(function () {
+                  upload.innerHTML = '下拉刷新';
+                  content_top = 0;
+                  content.style.transition = '0.6s all ease';
+                  content.style.transform = `translateY(${content_top}px)`;
+                });
+              }else{
+                content_top = 0;
+              }
+              content.style.transition = '0.6s all ease';
+              content.style.transform = `translateY(${content_top}px)`;
+            }
+
+          }
+
+          binner.addEventListener('touchmove',fnMove,false);
+          binner.addEventListener('touchend',fnEnd,false);
+        },false);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="upload">
+      下拉刷新
+    </div>
+    <div id="content">
+      <div id="binner">
+        <ul id="binner_ul">
+          <li style="background:#c0c;">0</li>
+          <li style="background:#abc;">1</li>
+          <li style="background:#efc;">2</li>
+          <li style="background:#dec;">3</li>
+        </ul>
+      </div>
+      <ol id='ol'>
+
+      </ol>
+    </div>
+
+  </body>
+</html>

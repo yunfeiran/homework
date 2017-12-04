@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <style media="screen">
+      .box{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        background: #ccc;
+        line-height: 200px;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function () {
+        let oBox = document.querySelector('.box');
+        //设一个初始角度
+        let old_ang = 0;
+
+
+        oBox.addEventListener('touchstart',function (ev) {
+
+          if(ev.targetTouches.length >= 2){
+            //根据触摸两点坐标连线组成三角形（斜边），求出两个直角边的a和b
+            let a = ev.targetTouches[0].clientX - ev.targetTouches[1].clientX;
+            let b = ev.targetTouches[0].clientY - ev.targetTouches[1].clientY;
+
+            let ang = Math.atan2(b,a)*180/Math.PI;
+
+            //开始的角度
+            let startAng = old_ang;
+
+
+            ev.preventDefault();
+              function fnMove(ev) {
+                if (ev.targetTouches.length >= 2) {
+                  let c = ev.targetTouches[0].clientX - ev.targetTouches[1].clientX;
+                  let d = ev.targetTouches[0].clientY - ev.targetTouches[1].clientY;
+                  let ang2 = Math.atan2(d,c)*180/Math.PI;
+
+                  //这次旋转了多少度
+                  let xuanzh_ang = ang2 - ang;
+                  old_ang = startAng + xuanzh_ang;
+                  oBox.style.transform = `rotate(${old_ang}deg)`;
+
+                  ev.preventDefault();
+                }
+              }
+
+              function fnEnd() {
+                oBox.removeEventListener('touchmove',fnMove,false);
+                oBox.removeEventListener('touchend',fnEnd,false);
+              }
+
+              oBox.addEventListener('touchmove',fnMove,false);
+              oBox.addEventListener('touchend',fnEnd,false);
+
+
+          }
+
+        },false);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      有首歌这
+    </div>
+  </body>
+</html>

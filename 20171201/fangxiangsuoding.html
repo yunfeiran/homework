@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <style media="screen">
+      *{margin: 0;padding: 0;list-style: none;}
+      html{
+        font-size: 20px;
+      }
+      #binner{
+        width: 25rem;
+        height: 7.8rem;
+        overflow: hidden;
+      }
+      #binner ul{
+        width: 9999rem;
+        transform: translateX(0px);
+      }
+      #binner ul li{
+        width: 25rem;
+        height: 7.8rem;
+        float: left;
+        line-height: 7.8rem;
+        text-align: center;
+      }
+      #content{
+        background: #fff;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload=function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth*20/500+'px';
+
+        let binner = document.getElementById('binner');
+
+        binner.addEventListener('touchstart',function (ev) {
+
+          //获取触摸到第一点的坐标
+          let startX = ev.targetTouches[0].clientX;
+          let startY = ev.targetTouches[0].clientY;
+
+          let dir = '';
+
+          let binner_left = 0;
+          let content_top = 0;
+
+
+          function fnMove(ev) {
+            if (!dir) {
+              if (Math.abs(ev.targetTouches[0].clientX - startX) >= 5) {  //手指在屏幕上移动方向大于等于5  5是自己设定的一个值
+                console.log(1);
+                dir = 'x';
+              }else if(Math.abs(ev.targetTouches[0].clientY - startY) >= 5) {
+                console.log(2);
+                dir = 'y';
+              }
+            }else {
+
+              console.log(dir);
+              if (dir == 'x') {
+              //  ev.targetTouches[0].clientX
+              } else if(dir == 'y'){
+
+              }
+            }
+          }
+
+          function fnEnd() {
+            binner.removeEventListener('touchmove',fnMove,false);
+            binner.removeEventListener('touchend',fnEnd,false);
+          }
+
+          binner.addEventListener('touchmove',fnMove,false);
+          binner.addEventListener('touchend',fnEnd,false);
+        },false);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <div id="binner">
+        <ul id="binner_ul">
+          <li style="background:#c0c;">1</li>
+          <li style="background:#abc;">2</li>
+          <li style="background:#efc;">3</li>
+          <li style="background:#dec;">4</li>
+        </ul>
+      </div>
+    </div>
+
+  </body>
+</html>
