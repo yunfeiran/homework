@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+
+    </style>
+    <script type="text/javascript">
+      function d2a(d) {
+        return d*Math.PI/180;
+      }
+
+      window.onload = function () {
+        let oSvg = document.getElementById('svg');
+        let oPath = document.createElementNS("http://www.w3.org/2000/svg",'path');
+
+        let ox=400,oy=300,r=200;   //a,b是角度
+
+        //在纸上画图
+        // let OA_y = r*Math.sin(d2a(b));
+        //
+        // let AD_x = r*Math.cos(d2a(b));
+        //
+        // let ax = ox + AD_x,ay = oy - OA_y;   //A点坐标
+        //
+        // let OB_y = r*Math.sin(d2a(b));
+        //
+        // let BD_x = r*Math.cos(d2a(b));
+        //
+        // let bx = ox + BD_x,by = oy - OB_y;   //B点坐标
+        function pie(start,end,color) {
+
+          let
+          ax=ox+Math.sin(d2a(start))*r,
+          ay=oy-Math.cos(d2a(start))*r;
+
+          //求x2,y2
+          let
+          bx=ox+Math.sin(d2a(end))*r,
+          by=oy-Math.cos(d2a(end))*r;
+
+         oPath.style.stroke = color;
+         oPath.style.fill = 'none';
+        //  alert(ax);
+        //  alert(ay);
+        //  alert(bx);
+        //  alert(by);
+          oPath.setAttribute('d',`
+            M ${ox},${oy}
+            L ${ax},${ay}
+            A ${r},${r},0,${end-start>180?1:0},1,${bx},${by}
+            Z
+          `);
+          // oPath.setAttribute('d',`
+          //   M 100,100
+          //   L 200,133
+          //   A 100,100,0,0,1,185,100
+          //   Z
+          // `);
+
+          oSvg.appendChild(oPath);
+        }
+
+        pie(100,200,'#ccc');
+      }
+    </script>
+  </head>
+  <body>
+    <svg width="800" height="600" id="svg">
+
+    </svg>
+  </body>
+</html>
