@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+   
+    <script src="raphael.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      window.onload=function () {
+        let paper = Raphael(0,0,800,600);
+        //let oRect = paper.image(src,x,y,width,height);
+        let oRect = paper.path('M 100 100 L 300 100 300 200 100 200 Z');
+        oRect.attr('fill', 'blue');
+
+        oRect.click(rectClick);
+
+        function rectClick () {
+          // body...
+          //this.attr('transform', 'r45');
+          this.animate('transform', 'r45');
+          this.animate({'transform': 'r45 s2,1'}, 5000)
+        }
+
+      }
+    </script>
+  </head>
+  <body>
+   
+  </body>
+</html>

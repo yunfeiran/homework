@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- <meta name="viewport" content="width=device-width"> -->
+   
+    <script src="raphael.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      window.onload=function () {
+        let paper = Raphael(50,50,800,600);
+        let types=['linear', 'easeIn', 'easeOut', 'easeInOut', 'backIn', 'backOut', 'elastic', 'bounce'];
+
+        let rects = types.map(function(type, index) {
+          let oRect = paper.rect(0,index*60,50,50);
+          oRect.attr('fill','yellow');
+          return oRect;
+        });
+       
+        let oBtn = document.getElementById('btn1');
+
+        oBtn.onclick=function (){
+          rects.forEach(function (rect,index) {
+            // body...
+            rect.animate({'x': 600}, 3000,types[index])
+          });
+        }
+      }
+    </script>
+  </head>
+  <body>
+   <!-- <button id="btn">走</button>
+ --> 
+    <input type="button" name="" value="走啊" id="btn1">
+  </body>
+</html>
