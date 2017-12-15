@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #haishen{
+        width: 800px;
+        height: 600px;
+        border: 1px solid red;
+      }
+    </style>
+    <script src="echarts.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      let $ = document.querySelectorAll.bind(document);
+
+      window.onload = function () {
+        let oHaishen = $('#haishen')[0];
+      //  alert(oHaishen);
+        let myechart = echarts.init(oHaishen);
+        let option = {
+          title:{
+            text:'北京人口数量',
+            subtext:'2017年(单位：万)'
+          },
+          series:[
+            {
+              type:'pie',
+              name:'学历比例',
+              radius:[
+                0,
+                '40%'
+              ],
+              data:[
+                {name:'博士',value:150},
+                {name:'硕士',value:300},
+                {name:'本科',value:600},
+                {name:'专科',value:800}
+              ]
+            },
+            {
+              type:'pie',
+              name:'男女比例',
+              radius:[
+                0,
+                '30%'
+              ],
+              center:[
+                '20%',
+                '20%'
+              ],
+              data:[
+                {name:'男',value:1000},
+                {name:'女',value:1500},
+              ]
+            }
+          ],
+          animationEasing:'bounceOut'
+        }
+
+        myechart.setOption(option);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="haishen">
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #haishen{
+        width: 800px;
+        height: 600px;
+        border: 1px solid red;
+      }
+    </style>
+    <script src="echarts.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      let $ = document.querySelectorAll.bind(document);
+
+      window.onload = function () {
+        let oHaishen = $('#haishen')[0];
+      //  alert(oHaishen);
+        let myechart = echarts.init(oHaishen);
+
+        let option = {
+          title:{
+            text:'基础雷达图'
+          },
+          legend:{
+            data:[
+              '预算分配',
+              '实际开销'
+            ]
+          },
+          radar:{
+            name:{
+              textStyle:{
+                color: '#fff',
+                 backgroundColor: '#999',
+                 borderRadius: 3,
+                 padding: [3, 5]
+              }
+            },
+            indicator:[
+                {name:'销售',max:6500},
+                {name:'管理',max:16000},
+                {name:'信息技术',max:30000},
+                {name:'客服',max:38000},
+                {name:'研发',max:52000},
+                {name:'研市场',max:25000}
+            ]
+          },
+          series:[
+            {
+              type:'radar',
+              name:'预算VS开销',
+              data:[
+                {
+                  value:[4300, 10000, 28000, 35000, 50000, 19000],
+                  name:'预算分配'
+                },
+                {
+                  value:[5000, 14000, 28000, 31000, 42000, 21000],
+                  name:'实际开销'
+                }
+              ]
+            }
+          ],
+
+        }
+
+        myechart.setOption(option);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="haishen">
+
+    </div>
+  </body>
+</html>

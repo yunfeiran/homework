@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #haishen{
+        width: 800px;
+        height: 600px;
+        border: 1px solid red;
+      }
+    </style>
+    <script src="echarts.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      let $ = document.querySelectorAll.bind(document);
+
+      window.onload = function () {
+        let oHaishen = $('#haishen')[0];
+      //  alert(oHaishen);
+        let myechart = echarts.init(oHaishen);
+        let option = {
+          title:{
+            text:'北京人口数量',
+            subtext:'2017年(单位：万)'
+          },
+          legend:{
+            data:['女','男'],
+            orient:'horizontal'
+          },
+          xAxis:[
+            {
+              type:'category',
+              data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+            }
+          ],
+          yAxis:[
+            {
+              type:'value'
+            }
+          ],
+          series:[
+            // {
+            //   name:'男',
+            //   type:'bar',
+            //   data:['600','700','800','820','850','900','920','980','1000','1100','1050','950']
+            // },
+            // {
+            //   name:'女',
+            //   type:'bar',
+            //   data:['500','550','600','700','770','800','900','1000','1100','1010','1200','800']
+            // }
+            {
+              name:'男',
+              type:'bar',
+              data:[600,700,800,820,850,900,920,980,1000,1100,1050,950]
+            },
+            {
+              name:'女',
+              type:'bar',
+              data:[500,550,600,700,770,800,900,1000,1100,1010,1200,800]
+            }
+          ],
+          animationEasing:'bounceOut'
+        }
+
+        myechart.setOption(option);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="haishen">
+
+    </div>
+  </body>
+</html>
