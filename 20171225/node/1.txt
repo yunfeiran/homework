@@ -1,0 +1,22 @@
+aaa
+bbb
+vvv
+
+------WebKitFormBoundarygTv6e7AAJD67znNV--
+
+------WebKitFormBoundaryr4wKxK2zyqotkyDl
+Content-Disposition: form-data; name="user"
+
+haoran
+------WebKitFormBoundaryr4wKxK2zyqotkyDl
+Content-Disposition: form-data; name="pass"
+
+41556
+------WebKitFormBoundaryr4wKxK2zyqotkyDl
+Content-Disposition: form-data; name="file1"; filename="1.txt"
+Content-Type: text/plain
+
+aaa
+bbb
+vvv
+------WebKitFormBoundaryr4wKxK2zyqotkyDl--
